@@ -32,6 +32,7 @@ do {
         }
     }
 } while ($codeExiste);
+
 $nomExiste = false;
 
 do {
@@ -51,3 +52,24 @@ $categorie =   [
 ];
 
 $categories[] = $categorie;
+
+$categorieExiste =  false;
+$code = readline("saisir le code :");
+for ($index = 0; $index < count($categories); $index++) {
+    if ($categories[$index]["noms"] == $nom) {
+        $categorieExiste= true;
+        break;
+    }
+}
+if ($categorieExiste) {
+    $produit =   [
+        'nom' => readline("saisir le nom : "),
+        "ref" => readline("saisir la reference : "),
+        'prix' => (int)readline("saisir le prix : "),
+        'qte' => (int)readline("saisir la quantité : ")
+    ];
+    $categories[$index]["produits"][] = $produit;
+} else {
+    echo " désolé , la categorie n'existe pas...";
+}
+

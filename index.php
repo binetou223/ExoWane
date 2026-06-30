@@ -19,3 +19,35 @@ for ($index = 0; $index < count($categories); $index++) {
         print_r($categories[$index]['produits']);
     }
 }
+
+$codeExiste = false;
+
+do {
+    $code = readline('Entrer le code : ');
+    for ($index = 0; $index < count($categories); $index++) {
+        if ($categories[$index]["code"] == $code) {
+            $codeExiste = true;
+            echo "Le code existe déjà ...\n";
+            break;
+        }
+    }
+} while ($codeExiste);
+$nomExiste = false;
+
+do {
+    $nom = readline('Entrer le nom : ');
+    for ($index = 0; $index < count($categories); $index++) {
+        if ($categories[$index]["noms"] == $nom) {
+            $codeExiste = true;
+            echo "Le nom existe déjà ...\n";
+            break;
+        }
+    }
+} while ($nomExiste);
+$categorie =   [
+    "code" => $code,
+    "nom" => $nom,
+    "produits" => []
+];
+
+$categories[] = $categorie;

@@ -63,13 +63,69 @@ function saisieChampObligatoireEtUnique(array $categories,string $smsSaisie, str
 function enregistrerCategorie(): void{
     global $categories;
     $code = saisieChampObligatoireEtUnique($categories,"Entrez le code :", "champs obligatoire : ", "code");
-    $nom = saisieChampObligatoireEtUnique($categories,"Entrez le nom :", "champs obligatoire : ", "nom");
+    $nom = saisieChampObligatoireEtUnique($categories,"Entrez le nom :", "champs obligatoire : ", "noms");
 
     $categorie  =   [
-            "nom" => $nom,
+            "noms" => $nom,
             "code" => $code,
             "produits" => []
          ];
 
     $categories[] = $categorie;
- }
+}
+
+function ajouterProduitDansCategorie(array &$categories,string $message): void
+{
+    $code = saisieChamp($message);
+
+    $index = rechercheCategorieParCle($categories, "code", $code);
+
+    if ($index !== false) {
+
+        $produit = [
+            "nom"  =>saisieChamp($message),
+            "ref"  => saisieChamp($message),
+            "prix" => (int) saisieChamp($message),
+            "qte"  => (int) saisieChamp($message)
+        ];
+
+        $categories[$index]["produits"][] = $produit;
+
+        echo "Produit ajouté avec succès.\n";
+    } else {
+        echo "La catégorie n'existe pas.\n";
+    }
+}
+function enregistrerCategorieAvecProduits(array &$categories): void
+{
+    $code = saisieChampObligatoireEtUnique($categories,"Entrez le code : ","Champ obligatoire", "code");
+
+    $nom = saisieChampObligatoireEtUnique($categories,"Entrez le nom : ","Champ obligatoire","noms");
+
+    $produits = [];
+
+    do {
+
+        $produit = [
+            "nom"  => saisieChamp("Nom du produit : "),
+            "ref"  => saisieChamp("Référence : "),
+            "prix" => (int) saisieChamp("Prix : "),
+            "qte"  => (int) saisieChamp("Quantité : ")
+        ];
+
+        $produits[] = $produit;
+
+        $choix = strtolower(
+            saisieChamp("Voulez-vous ajouter un autre produit ? (oui/non) : ")
+        );
+
+    } while ($choix === "oui");
+
+    $categories[] = [
+        "noms" => $nom,
+        "code" => $code,
+        "produits" => $produits
+    ];
+
+    echo "Catégorie enregistrée avec succès.\n";
+}

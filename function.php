@@ -63,10 +63,10 @@ function saisieChampObligatoireEtUnique(array $categories,string $smsSaisie, str
 function enregistrerCategorie(): void{
     global $categories;
     $code = saisieChampObligatoireEtUnique($categories,"Entrez le code :", "champs obligatoire : ", "code");
-    $nom = saisieChampObligatoireEtUnique($categories,"Entrez le nom :", "champs obligatoire : ", "nom");
+    $nom = saisieChampObligatoireEtUnique($categories,"Entrez le nom :", "champs obligatoire : ", "noms");
 
     $categorie  =   [
-            "nom" => $nom,
+            "noms" => $nom,
             "code" => $code,
             "produits" => []
          ];

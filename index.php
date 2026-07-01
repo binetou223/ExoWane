@@ -56,7 +56,7 @@ $categories[] = $categorie;
 $categorieExiste =  false;
 $code = readline("saisir le code :");
 for ($index = 0; $index < count($categories); $index++) {
-    if ($categories[$index]["noms"] == $nom) {
+    if ($categories[$index]["noms"] == $code) {
         $categorieExiste = true;
         break;
     }
